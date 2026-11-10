@@ -4,7 +4,6 @@
 
 package main;
 
-import java.net.URI;
 import java.util.Properties;
 import java.io.FileInputStream;
 import java.io.File;
@@ -55,5 +54,16 @@ public class Main {
         // Instantiate each plugin and cast it to its interface
         TFWords tfwords = (TFWords) wordsPluginClass.getDeclaredConstructor().newInstance();
         TFFreqs tffreqs = (TFFreqs) freqsPluginClass.getDeclaredConstructor().newInstance();
+
+        // Extract the words
+        List<String> wordsList = tfwords.extractWords(args[0]);
+
+        // Count using freq plugin
+        List<Map.Entry<String,Integer>> wordFreqs = tffreqs.top25(wordsList);
+
+        // Print the results
+        for (Map.Entry<String, Integer> entry : wordFreqs) {
+            System.out.println(entry.getKey() + "  -  " + entry.getValue());
+        }
     }
 }
