@@ -5,10 +5,11 @@
 
 package interfaces;
 
+import java.io.IOException;
 import java.util.List;
 
 public interface TFWords {
-    public List<String> extractWords(String path);
+    public List<String> extractWords(String path) throws IOException;
 }
 
 
